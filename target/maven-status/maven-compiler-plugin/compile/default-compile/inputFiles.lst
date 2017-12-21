@@ -7,6 +7,7 @@
 /Users/tobitoi/Downloads/backendTpm/src/main/java/com/backend/util/constant/Constants.java
 /Users/tobitoi/Downloads/backendTpm/src/main/java/com/backend/dao/UserDao.java
 /Users/tobitoi/Downloads/backendTpm/src/main/java/com/backend/service/LoginService.java
+/Users/tobitoi/Downloads/backendTpm/src/main/java/com/backend/util/RandomUtil.java
 /Users/tobitoi/Downloads/backendTpm/src/main/java/com/backend/config/shiro/ShiroConfiguration.java
 /Users/tobitoi/Downloads/backendTpm/src/main/java/com/backend/dao/ArticleDao.java
 /Users/tobitoi/Downloads/backendTpm/src/main/java/com/backend/util/constant/ErrorEnum.java

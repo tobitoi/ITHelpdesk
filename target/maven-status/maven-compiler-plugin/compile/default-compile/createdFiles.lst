@@ -8,6 +8,7 @@ com/backend/util/StringTools.class
 com/backend/config/exception/CommonJsonException.class
 com/backend/service/UserService.class
 com/backend/service/impl/PermissionServiceImpl.class
+com/backend/util/RandomUtil.class
 com/backend/util/constant/ErrorEnum.class
 com/backend/util/constant/Constants.class
 com/backend/config/shiro/AjaxPermissionsAuthorizationFilter.class
