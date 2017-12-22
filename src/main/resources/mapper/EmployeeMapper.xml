@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.backend.dao.EmployeeDao">
+
+    <insert id="addEmployee" parameterType="com.alibaba.fastjson.JSONObject">
+        INSERT INTO employee
+        (badge_number, gender, name, street, user_id, dept_id) VALUES
+        (#{badgeNumber}, #{gender}, #{name}, #{street}, #{userId}, #{deptId)})
+    </insert>
+
+    <select id="countEmployee" resultType="Integer">
+        SELECT count(0)
+        FROM employee w
+    </select>
+
+    <select id="listEmployee" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT *
+        FROM employee w
+        LIMIT #{offSet}, #{pageRow}
+    </select>
+
+    <update id="updateEmployee" parameterType="com.alibaba.fastjson.JSONObject">
+        UPDATE employee
+        SET
+        user_id = #{user_id}
+        name = #{name}
+        street = #{street}
+        gender = #{gender}
+        dept_id = #{dept_id}
+
+        WHERE id = #{id}
+    </update>
+
+</mapper>

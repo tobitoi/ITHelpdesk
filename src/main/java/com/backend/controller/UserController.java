@@ -57,11 +57,6 @@ public class UserController {
         return userService.listAllPermission();
     }
 
-    /**
-     * 新增角色
-     *
-     * @return
-     */
     @RequiresPermissions("role:add")
     @PostMapping("/addRole")
     public JSONObject addRole(@RequestBody JSONObject requestJson) {

@@ -1,4 +1,5 @@
 com/backend/service/LoginService.class
+com/backend/dao/EmployeeDao.class
 com/backend/config/exception/GlobalExceptionHandler.class
 com/backend/config/shiro/ShiroConfiguration.class
 com/backend/controller/ArticleController.class
@@ -6,6 +7,7 @@ com/backend/Application.class
 com/backend/service/impl/LoginServiceImpl.class
 com/backend/util/StringTools.class
 com/backend/config/exception/CommonJsonException.class
+com/backend/service/EmployeeService.class
 com/backend/service/UserService.class
 com/backend/service/impl/PermissionServiceImpl.class
 com/backend/util/RandomUtil.class
@@ -13,6 +15,7 @@ com/backend/util/constant/ErrorEnum.class
 com/backend/util/constant/Constants.class
 com/backend/config/shiro/AjaxPermissionsAuthorizationFilter.class
 com/backend/config/shiro/UserRealm.class
+com/backend/controller/EmployeeController.class
 com/backend/util/model/One2Many.class
 com/backend/util/CommonUtil.class
 com/backend/config/exception/MainsiteErrorController.class
@@ -21,6 +24,7 @@ com/backend/dao/LoginDao.class
 com/backend/dao/PermissionDao.class
 com/backend/service/ArticleService.class
 com/backend/controller/LoginController.class
+com/backend/service/impl/EmployeeServiceImpl.class
 com/backend/config/system/DefaultView.class
 com/backend/service/impl/ArticleServiceImpl.class
 com/backend/service/PermissionService.class
