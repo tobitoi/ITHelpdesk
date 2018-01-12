@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.backend.dao.QualityDao">
+
+    <insert id="addQuality" parameterType="com.alibaba.fastjson.JSONObject">
+        INSERT INTO quality_control
+        (employee_id, date_start, tools_id, problem, repair_desc, date_finish, reporter, verify_status) VALUES
+        (#{employeeId}, #{dateStart}, #{toolsId}, #{problem}, #{repairDesc}, #{dateFinish}, #{reporter}, #{verifyStatus})
+    </insert>
+
+    <select id="countQuality" resultType="Integer">
+        SELECT count(0)
+        FROM quality_control w
+        WHERE w.delete_status = '1'
+    </select>
+
+    <select id="listQuality" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT quality_control.*,DATE_FORMAT(quality_control.date_start, '%Y-%m-%d %T') startDate,
+        DATE_FORMAT(quality_control.date_finish, '%Y-%m-%d %T') finishDate, CONCAT(TIMEDIFF(date_start,date_finish),'') AS diff , employee.name, tools.host_name from quality_control, employee, tools
+        where quality_control.delete_status = 1
+        AND quality_control.employee_id = employee.id AND quality_control.tools_id = tools.id
+        LIMIT #{offSet}, #{pageRow}
+    </select>
+
+    <select id="listEmployee" resultType="com.alibaba.fastjson.JSONObject">
+        select id,name from employee
+    </select>
+
+    <select id="listTools" resultType="com.alibaba.fastjson.JSONObject">
+        select id,host_name from tools
+    </select>
+
+    <select id="listQualityChart" resultType="com.alibaba.fastjson.JSONObject">
+        select employee.name, count(quality_control.reporter) AS value
+        from quality_control,employee where quality_control.employee_id = employee.id group by name
+    </select>
+
+    <update id="updateQuality" parameterType="com.alibaba.fastjson.JSONObject">
+        UPDATE quality_control
+        SET
+        employee_id = #{employeeId}
+        ,tools_id = #{toolsId}
+        ,date_finish = #{dateFinish}
+        ,problem = #{problem}
+        ,repair_desc = #{repairDesc}
+        ,reporter = #{reporter}
+        ,verify_status = #{verifyStatus}
+        <if test="delete_status!=null and delete_status!=''">
+            ,delete_status=#{delete_status}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <update id="deleteTools" parameterType="com.alibaba.fastjson.JSONObject">
+        UPDATE tools
+        SET
+        <if test="delete_status!=null and delete_status!=''">
+            delete_status=#{delete_status}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+</mapper>

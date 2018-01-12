@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.backend.dao.ReporterDao">
+
+    <insert id="addReporter" parameterType="com.alibaba.fastjson.JSONObject">
+        INSERT INTO reporter
+        ( name, date, tools_id, problems_id, confirm) VALUES
+        (#{name}, #{date}, #{toolsId}, #{problemsId}, #{confirm})
+    </insert>
+
+    <select id="countReporter" resultType="Integer">
+        SELECT count(0)
+        FROM reporter w
+    </select>
+
+    <select id="listReporter" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT reporter.*, tools.host_name, problems.description from reporter, tools, problems where reporter.tools_id = tools.id
+        AND reporter.problems_id = problems.id
+        LIMIT #{offSet}, #{pageRow}
+    </select>
+
+    <update id="updateReporter" parameterType="com.alibaba.fastjson.JSONObject">
+        UPDATE reporter
+        SET
+        name = #{name}
+        ,tools_id = #{toolsId}
+        ,date = #{date}
+        ,problems_id= #{problemsId}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

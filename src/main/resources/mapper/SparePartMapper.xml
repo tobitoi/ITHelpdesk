@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.backend.dao.SparePartDao">
+
+    <insert id="addSparePart" parameterType="com.alibaba.fastjson.JSONObject">
+        INSERT INTO sparepart
+        ( kode, name) VALUES
+        (#{kode}, #{name})
+    </insert>
+
+    <select id="countSparePart" resultType="Integer">
+        SELECT count(0)
+        FROM sparepart w
+    </select>
+
+    <select id="listSparePart" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT *
+        FROM sparepart w
+        LIMIT #{offSet}, #{pageRow}
+    </select>
+
+    <update id="updateSparePart" parameterType="com.alibaba.fastjson.JSONObject">
+        UPDATE sparepart
+        SET
+        kode = #{kode}
+        ,name = #{name}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

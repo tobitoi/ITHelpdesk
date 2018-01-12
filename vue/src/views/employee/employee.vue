@@ -8,26 +8,22 @@
               </el-form-item>
             </el-form>
     </div>
-    <el-table :data="list" v-loading.body="listLoading" element-loading-text="拼命加载中" border fit
+    <el-table :data="list"
+      v-loading.body="listLoading"
+      element-loading-text="loading"
+      border fit
               highlight-current-row>
       <el-table-column align="center" label="No" width="80">
         <template slot-scope="scope">
           <span v-text="getIndex(scope.$index)"> </span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label=" Id" prop="id" style="width: 60px;"></el-table-column>
-      <el-table-column align="center" label="User Id" prop="user_id" style="width: 60px;"></el-table-column>
-      <el-table-column align="center" label="Username" prop="name" style="width: 60px;"></el-table-column>
-      <el-table-column align="center" label="gender" prop="gender" style="width: 60px;"></el-table-column>
-      <el-table-column align="center" label="street" prop="street" style="width: 60px;"></el-table-column>
-      <el-table-column align="center" label="department Id" prop="dept_id" style="width: 60px;"></el-table-column>
-      <el-table-column align="center" label="badge number" prop="badge_number" style="width: 60px;"></el-table-column>
+      <el-table-column align="center" label="Name" prop="name" style="width: 60px;"  ></el-table-column>
+      <el-table-column align="center" label="Gender" prop="gender" style="width: 60px;"></el-table-column>
+      <el-table-column align="center" label="Street" prop="street" style="width: 60px;"></el-table-column>
       <el-table-column align="center" label="Action" width="220" v-if="hasPerm('employee:update')">
         <template slot-scope="scope">
-          <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)">Edit</el-button>
-          <el-button type="danger" icon="delete" v-if="scope.row.userId!=userId "
-                     @click="removeUser(scope.$index)">Remove
-          </el-button>
+          <el-button type="primary" icon="edit" @click="showUpdate(scope.$index,scope.$row)">Edit</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -43,7 +39,7 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form class="small-space" :model="tempEmployee" label-position="left" label-width="80px"
                style='width: 300px; margin-left:50px;'>
-        <el-form-item label="username" required>
+        <el-form-item label="user Id" required>
           <el-input type="text" v-model="tempEmployee.userId">
           </el-input>
         </el-form-item>
@@ -52,19 +48,13 @@
           </el-input>
         </el-form-item>
         <el-form-item label="gender" required>
-          <el-input type="text" v-model="tempEmployee.gender">
-          </el-input>
+         <el-select v-model="tempEmployee.gender" placeholder="Gender">
+              <el-option label="Man" value="Man"></el-option>
+              <el-option label="Woman" value="Woman"></el-option>
+         </el-select>
         </el-form-item>
         <el-form-item label="street" required>
           <el-input type="text" v-model="tempEmployee.street">
-          </el-input>
-        </el-form-item>
-        <el-form-item label="department " required>
-          <el-input type="text" v-model="tempEmployee.deptId">
-          </el-input>
-        </el-form-item>
-        <el-form-item label="Badge Number " required>
-          <el-input type="text" v-model="tempEmployee.badgeNumber">
           </el-input>
         </el-form-item>
        </el-form>
@@ -91,12 +81,11 @@
         dialogStatus: 'create',
         dialogFormVisible: false,
         textMap: {
-          update: '编辑',
-          create: '创建文章'
+          update: 'Update Employee',
+          create: 'Create Employee'
         },
         tempEmployee: {
          userId: '',
-         deptId: '',
          name: '',
          gender: '',
          street: '',
@@ -139,30 +128,24 @@
         return (this.listQuery.pageNum - 1) * this.listQuery.pageRow + $index + 1
       },
       showCreate() {
-        //显示新增对话框
         this.tempEmployee.userId = "";
-        this.tempEmployee.deptId = "";
         this.tempEmployee.name = "";
         this.tempEmployee.street = "";
         this.tempEmployee.gender = "";
-        this.tempEmployee.badgeNumber = "";
         this.dialogStatus = "create"
         this.dialogFormVisible = true
       },
-      showUpdate($index) {
-        //显示修改对话框
+      showUpdate($index,$row) {
         let employee = this.list[$index];
+        this.tempEmployee.id = this.list[$index].id;
         this.tempEmployee.name = employee.name;
         this.tempEmployee.userId = employee.user_id;
         this.tempEmployee.gender = employee.gender;
         this.tempEmployee.street = employee.street;
-        this.tempEmployee.deptId = employee.dept_id;
-        this.tempEmployee.badgeNumber = employee.badge_number;
         this.dialogStatus = "update"
         this.dialogFormVisible = true
       },
       createEmployee() {
-        //保存新文章
         this.api({
           url: "/employee/addEmployee",
           method: "post",
@@ -173,7 +156,6 @@
         })
       },
       updateEmployee() {
-        //修改文章
         this.api({
           url: "/employee/updateEmployee",
           method: "post",

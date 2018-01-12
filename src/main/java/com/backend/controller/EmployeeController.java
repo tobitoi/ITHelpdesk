@@ -29,14 +29,14 @@ public class EmployeeController {
     @RequiresPermissions("employee:add")
     @PostMapping("/addEmployee")
     public JSONObject addEmployee(@RequestBody JSONObject requestJson) {
-        CommonUtil.hasAllRequired(requestJson, "userId,name,gender,deptId,street");
+        CommonUtil.hasAllRequired(requestJson, "userId,name,gender,street");
         return employeeService.addEmployee(requestJson);
     }
 
     @RequiresPermissions("employee:update")
     @PostMapping("/updateEmployee")
     public JSONObject updateEmployee(@RequestBody JSONObject requestJson) {
-        CommonUtil.hasAllRequired(requestJson, "userId,name,gender,deptId,street");
+        CommonUtil.hasAllRequired(requestJson, "userId,name,gender,street");
         return employeeService.updateEmployee(requestJson);
     }
 }
