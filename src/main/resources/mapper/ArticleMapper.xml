@@ -3,11 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.backend.dao.ArticleDao">
 
-    <insert id="addArticle" parameterType="com.alibaba.fastjson.JSONObject">
+    <insert id="addArticle" parameterType="com.alibaba.fastjson.JSONObject" useGeneratedKeys="true" keyProperty="articleId">
         INSERT INTO article
-        (content) VALUES
+        (content,ticket) VALUES
             ( #{content})
     </insert>
+
+    <select id="queryMaxTicket" resultType="int">
+        SELECT max(ticket)
+        FROM article
+    </select>
 
     <select id="countArticle" resultType="Integer">
         SELECT count(0)
@@ -30,6 +35,9 @@
         UPDATE article
            SET
             content = #{content}
+        <if test="delete_status!=null and delete_status!=''">
+            ,delete_status=#{delete_status}
+        </if>
         WHERE id = #{id}
     </update>
 

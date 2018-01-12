@@ -38,4 +38,11 @@ public class ArticleController {
         CommonUtil.hasAllRequired(requestJson, "id,content");
         return articleService.updateArticle(requestJson);
     }
+
+    @RequiresPermissions("article:delete")
+    @PostMapping("/deleteArticle")
+    public JSONObject deleteArticle(@RequestBody JSONObject requestJson) {
+        CommonUtil.hasAllRequired(requestJson, "id");
+        return articleService.deleteArticle(requestJson);
+    }
 }

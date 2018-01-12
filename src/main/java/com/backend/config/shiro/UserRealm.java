@@ -29,8 +29,8 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         Session session = SecurityUtils.getSubject().getSession();
         JSONObject permission = (JSONObject) session.getAttribute(Constants.SESSION_USER_PERMISSION);
-        logger.info("permission的值为:" + permission);
-        logger.info("本用户权限为:" + permission.get("permissionList"));
+        logger.info("Role Value:" + permission);
+        logger.info("Role:" + permission.get("permissionList"));
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         authorizationInfo.addStringPermissions((Collection<String>) permission.get("permissionList"));
         return authorizationInfo;

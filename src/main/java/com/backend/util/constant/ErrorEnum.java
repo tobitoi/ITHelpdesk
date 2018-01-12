@@ -5,7 +5,7 @@ package com.backend.util.constant;
  */
 public enum  ErrorEnum {
     E_400("400", "Request processing exception, please try again later"),
-    E_500("500", "Wrong way to request, please check,请检查 GET/POST"),
+    E_500("500", "Wrong way to request, please check, GET/POST"),
     E_501("501", "The request path does not exist"),
     E_502("502", "Insufficient permissions"),
     E_10008("10008", "Role deletion failed, there are still users belong to this role"),

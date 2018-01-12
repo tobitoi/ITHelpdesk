@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public JSONObject addUser(JSONObject jsonObject) {
         userDao.addUser(jsonObject);
+        System.out.println(jsonObject.getInteger("userId"));
         return CommonUtil.successJson();
     }
 

@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.backend.dao.ArticleDao;
 import com.backend.service.ArticleService;
 import com.backend.util.CommonUtil;
+import com.backend.util.constant.ErrorEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,8 +24,15 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public JSONObject addArticle(JSONObject jsonObject) {
+        int maxTicket = articleDao.queryMaxTicket();
+        maxTicket = maxTicket+1;
+
+        jsonObject.put("ticket",maxTicket);
         articleDao.addArticle(jsonObject);
-        return CommonUtil.successJson();
+        System.out.println("==================================");
+        System.out.println(jsonObject.getInteger("articleId"));
+        System.out.println("==================================");
+        return CommonUtil.successJson(maxTicket);
     }
 
 
@@ -40,6 +49,17 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(rollbackFor = Exception.class)
     public JSONObject updateArticle(JSONObject jsonObject) {
         articleDao.updateArticle(jsonObject);
+        return CommonUtil.successJson();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public JSONObject deleteArticle(JSONObject jsonObject) {
+        List<JSONObject> article = (List<JSONObject>) articleDao.listArticle(jsonObject);
+        if (article != null && article.size() > 0) {
+            return CommonUtil.errorJson(ErrorEnum.E_10008);
+        }
+        article.remove(jsonObject);
         return CommonUtil.successJson();
     }
 }

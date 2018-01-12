@@ -5,7 +5,7 @@ package com.backend.util.constant;
  */
 public class Constants {
     public static final String SUCCESS_CODE = "100";
-    public static final String SUCCESS_MSG = "请求成功";
+    public static final String SUCCESS_MSG = "The request is successful";
     public static final String SESSION_USER_INFO = "userInfo";
     public static final String SESSION_USER_PERMISSION = "userPermission";
 }

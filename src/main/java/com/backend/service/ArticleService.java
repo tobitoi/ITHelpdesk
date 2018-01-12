@@ -9,4 +9,5 @@ public interface ArticleService {
     JSONObject addArticle(JSONObject jsonObject);
     JSONObject listArticle(JSONObject jsonObject);
     JSONObject updateArticle(JSONObject jsonObject);
+    JSONObject deleteArticle(JSONObject jsonObject);
 }

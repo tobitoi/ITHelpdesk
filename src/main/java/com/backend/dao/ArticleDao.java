@@ -12,4 +12,5 @@ public interface ArticleDao {
     int countArticle(JSONObject jsonObject);
     List<JSONObject> listArticle(JSONObject jsonObject);
     int updateArticle(JSONObject jsonObject);
+    int queryMaxTicket();
 }
