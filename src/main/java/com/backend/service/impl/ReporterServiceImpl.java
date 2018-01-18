@@ -40,4 +40,10 @@ public class ReporterServiceImpl implements ReporterService {
         reporterDao.updateReporter(jsonObject);
         return CommonUtil.successJson();
     }
+
+    @Override
+    public JSONObject uploadImage(JSONObject jsonObject) {
+        reporterDao.uploadImage(jsonObject);
+        return CommonUtil.successJson();
+    }
 }

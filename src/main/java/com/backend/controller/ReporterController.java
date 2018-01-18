@@ -39,4 +39,10 @@ public class ReporterController {
         CommonUtil.hasAllRequired(requestJson, "name,date");
         return reporterService.updateReporter(requestJson);
     }
+
+    @PostMapping("/uploadImage")
+    public JSONObject uploadImage(@RequestBody JSONObject requestJson) {
+        CommonUtil.hasAllRequired(requestJson, "imageUrl");
+        return reporterService.uploadImage(requestJson);
+    }
 }

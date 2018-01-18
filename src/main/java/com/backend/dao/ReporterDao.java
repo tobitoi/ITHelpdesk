@@ -12,4 +12,5 @@ public interface ReporterDao {
     int countReporter(JSONObject jsonObject);
     List<JSONObject> listReporter(JSONObject jsonObject);
     int updateReporter(JSONObject jsonObject);
+    int uploadImage(JSONObject jsonObject);
 }

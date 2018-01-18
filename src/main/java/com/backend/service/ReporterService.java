@@ -9,4 +9,5 @@ public interface ReporterService {
     JSONObject addReporter(JSONObject jsonObject);
     JSONObject listReporter(JSONObject jsonObject);
     JSONObject updateReporter(JSONObject jsonObject);
+    JSONObject uploadImage(JSONObject jsonObject);
 }
