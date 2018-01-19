@@ -5,8 +5,8 @@
 
     <insert id="addReporter" parameterType="com.alibaba.fastjson.JSONObject">
         INSERT INTO reporter
-        ( name, date, tools_id, problems_id, confirm) VALUES
-        (#{name}, #{date}, #{toolsId}, #{problemsId}, #{confirm})
+        ( name, date, tools_id, problems_id, confirm,imageUrl) VALUES
+        (#{name}, #{date}, #{toolsId}, #{problemsId}, #{confirm}, #{avatar})
     </insert>
 
     <select id="countReporter" resultType="Integer">
@@ -27,6 +27,7 @@
         ,tools_id = #{toolsId}
         ,date = #{date}
         ,problems_id= #{problemsId}
+        ,imageUrl= #{avatar}
         WHERE id = #{id}
     </update>
 
